@@ -509,10 +509,27 @@
                 justify-content: center;
             }
 
-            .top-section { padding-top: 1vh; }
-            .top-section.hero-panel { padding: 0.25rem 0.5rem; }
+            /* bring the small top panel absolutely to the top-center */
+            .top-section {
+                position: absolute;
+                top: 2vh;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 5;
+                padding-top: 0;
+            }
+            .top-section.hero-panel {
+                padding: 0.2rem 0.5rem;
+                background: rgba(0,0,0,0.12);
+            }
 
-            .bottom-section { margin-top: 16vh; }
+            /* push the main box lower so the face is visible */
+            .bottom-section {
+                margin-top: 28vh;
+            }
+            .bottom-section.hero-panel {
+                padding: 0.8rem 1rem;
+            }
 
             .hero {
                 background-position: center top;
@@ -527,8 +544,13 @@
                 padding: 1rem;
             }
 
+            /* Force title to a single line on mobile to reduce box height */
             .main-title {
-                font-size: clamp(2.2rem, 10vw, 3.6rem);
+                font-size: clamp(2rem, 9vw, 3.2rem);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
             }
 
             .subtitle {
