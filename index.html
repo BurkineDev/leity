@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💎 Laety Birthday Brunch 💎</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --emerald-deep: #0d4a3a;
+            --emerald: #1a6b52;
+            --emerald-light: #2d8f6f;
+            --gold: #d4af37;
+            --gold-light: #f4d03f;
+            --gold-pale: #fef3c7;
+            --cream: #fdfbf7;
+            --dark: #0a0f0d;
+            --ochre: #cc7722;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--dark);
+            color: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Full Screen Hero */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 100svh;
+            overflow: hidden;
+            background-image: url('laety-photo.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        /* keep image for screen readers but hide visually */
+        .hero-image {
+            display: none;
+        }
+
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Gradient Overlay */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* radial lighter area near top center to reveal the face */
+            background:
+                radial-gradient(circle at 50% 22%, rgba(10,15,13,0.06) 0%, rgba(10,15,13,0.18) 25%, rgba(10,15,13,0.5) 50%, rgba(10,15,13,0.9) 100%),
+                linear-gradient(180deg,
+                    rgba(10, 15, 13, 0.3) 0%,
+                    rgba(10, 15, 13, 0.12) 30%,
+                    rgba(10, 15, 13, 0.12) 50%,
+                    rgba(10, 15, 13, 0.65) 80%,
+                    rgba(10, 15, 13, 0.98) 100%);
+            pointer-events: none;
+        }
+
+        /* Sparkles */
+        .sparkles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: sparkle 3s infinite;
+            box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold-light);
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            z-index: 3;
+        }
+
+        /* Panel for improved readability */
+        .hero-panel {
+            display: inline-block;
+            background: rgba(0,0,0,0.28);
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            max-width: 94%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Top Section - Title */
+        .top-section {
+            text-align: center;
+            padding-top: 1vh; /* encore plus haut pour révéler le visage */
+        }
+
+        /* Specific panel tweaks for the top to be less intrusive */
+        .top-section.hero-panel {
+            background: rgba(0,0,0,0.12);
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+        }
+
+        .diamond-icon {
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .pre-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--gold-pale);
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            opacity: 0;
+            animation: fadeIn 1s 0.3s forwards;
+        }
+
+        .main-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 8vw, 4rem);
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 0.08em;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 40px rgba(212, 175, 55, 0.3);
+            margin: 0.3rem 0;
+            opacity: 0;
+            animation: fadeIn 1s 0.5s forwards;
+        }
+
+        .theme-line {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--cream);
+            letter-spacing: 0.15em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            opacity: 0;
+            animation: fadeIn 1s 0.7s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bottom Section */
+        .bottom-section {
+            text-align: center;
+            margin-top: 22vh; /* descendre le minuteur pour libérer le visage */
+        }
+
+        .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+            font-style: italic;
+            color: var(--cream);
+            text-shadow: 0 2px 15px rgba(0,0,0,0.7);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.9s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mini Countdown */
+        .mini-countdown {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 1.1s forwards;
+        }
+
+        .mini-countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.6rem 1rem;
+            background: rgba(13, 74, 58, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            min-width: 55px;
+        }
+
+        .mini-countdown-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .mini-countdown-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--cream);
+            opacity: 0.8;
+            margin-top: 0.2rem;
+        }
+
+        .mini-separator {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            align-self: center;
+            opacity: 0.6;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 1.3s forwards;
+        }
+
+        .scroll-text {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold-pale);
+            opacity: 0.7;
+        }
+
+        .scroll-arrow {
+            width: 20px;
+            height: 30px;
+            border: 2px solid rgba(212, 175, 55, 0.5);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .scroll-arrow::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 2px;
+            animation: scrollBounce 1.5s infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { top: 6px; opacity: 1; }
+            50% { top: 14px; opacity: 0.3; }
+        }
+
+        /* Event Details Section */
+        .details-section {
+            padding: 5rem 2rem;
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(180deg, 
+                var(--dark) 0%,
+                rgba(13, 74, 58, 0.2) 50%,
+                var(--dark) 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+        }
+
+        .section-divider {
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 1rem auto;
+        }
+
+        .details-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 2rem;
+        }
+
+        .event-card {
+            background: linear-gradient(135deg, 
+                rgba(13, 74, 58, 0.4) 0%, 
+                rgba(10, 15, 13, 0.6) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--emerald), var(--gold), var(--emerald));
+        }
+
+        .event-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .detail-icon {
+            font-size: 1.3rem;
+            width: 40px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .detail-content {
+            flex: 1;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            color: var(--cream);
+        }
+
+        .detail-value a {
+            color: var(--cream);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .detail-value a:hover {
+            color: var(--gold);
+        }
+
+        /* Dress Code */
+        .dresscode {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .color-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .color-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .color-dot.green { background: var(--emerald); }
+        .color-dot.ochre { background: var(--ochre); }
+        .color-dot.gold { background: var(--gold); }
+
+        /* After Party */
+        .after-party {
+            background: linear-gradient(135deg, 
+                rgba(212, 175, 55, 0.1) 0%, 
+                rgba(13, 74, 58, 0.3) 100%);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .footer-decoration {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+        }
+
+        .footer-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--gold);
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 1.5rem;
+                justify-content: center;
+            }
+
+            .top-section { padding-top: 1vh; }
+            .top-section.hero-panel { padding: 0.25rem 0.5rem; }
+
+            .bottom-section { margin-top: 16vh; }
+
+            .hero {
+                background-position: center top;
+            }
+
+            .hero-overlay {
+                background: radial-gradient(circle at 50% 18%, rgba(10,15,13,0.02) 0%, rgba(10,15,13,0.25) 35%, rgba(10,15,13,0.85) 100%);
+            }
+
+            .hero-panel {
+                background: rgba(0,0,0,0.55);
+                padding: 1rem;
+            }
+
+            .main-title {
+                font-size: clamp(2.2rem, 10vw, 3.6rem);
+            }
+
+            .subtitle {
+                font-size: clamp(1.1rem, 4vw, 1.5rem);
+            }
+
+            .mini-countdown {
+                gap: 0.4rem;
+            }
+
+            .mini-countdown-item {
+                min-width: 48px;
+                padding: 0.5rem 0.6rem;
+            }
+
+            .mini-countdown-number {
+                font-size: 1.2rem;
+            }
+
+            .mini-separator {
+                font-size: 1rem;
+            }
+
+            .sparkles { display: none; }
+
+            .event-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .mini-separator {
+                display: none;
+            }
+
+            .mini-countdown {
+                gap: 0.3rem;
+            }
+
+            .mini-countdown-item {
+                min-width: 45px;
+                padding: 0.4rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Full Screen Hero -->
+    <section class="hero" aria-label="Zone principale, photo de Laety en arrière-plan">
+        <img src="laety-photo.jpg" alt="Photo de Laety" class="visually-hidden">
+        <div class="hero-overlay"></div>
+        <div class="sparkles" id="sparkles"></div>
+        
+        <div class="hero-content">
+            <!-- Top - Title -->
+            <div class="top-section hero-panel">
+                
+                
+                <p class="theme-line">🌿 Émeraude sacrée · Or du Soleil ✨</p>
+            </div>
+
+            <!-- Bottom - Quote, Countdown, Scroll -->
+            <div class="bottom-section hero-panel">
+                <p class="subtitle">« J'ai hâte de fêter avec vous »</p>
+                <h1 class="main-title">Laety Birthday Brunch</h1>
+                <div class="mini-countdown" id="countdown">
+                    <div class="mini-countdown-item">
+                        <span class="mini-countdown-number" id="days">00</span>
+                        <span class="mini-countdown-label">Jours</span>
+                    </div>
+                    <span class="mini-separator">:</span>
+                    <div class="mini-countdown-item">
+                        <span class="mini-countdown-number" id="hours">00</span>
+                        <span class="mini-countdown-label">Heures</span>
+                    </div>
+                    <span class="mini-separator">:</span>
+                    <div class="mini-countdown-item">
+                        <span class="mini-countdown-number" id="minutes">00</span>
+                        <span class="mini-countdown-label">Min</span>
+                    </div>
+                    <span class="mini-separator">:</span>
+                    <div class="mini-countdown-item">
+                        <span class="mini-countdown-number" id="seconds">00</span>
+                        <span class="mini-countdown-label">Sec</span>
+                    </div>
+                </div>
+
+                <div class="scroll-indicator">
+                    <span class="scroll-text">Découvrir</span>
+                    <div class="scroll-arrow"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details -->
+    <section class="details-section">
+        <div class="section-header">
+            <h2 class="section-title">✨ Les Détails ✨</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="details-grid">
+            <!-- Brunch Card -->
+            <div class="event-card">
+                <h3>🥂 Birthday Brunch</h3>
+                
+                <div class="detail-row">
+                    <span class="detail-icon">📅</span>
+                    <div class="detail-content">
+                        <p class="detail-label">Date</p>
+                        <p class="detail-value">Samedi 7 février 2026</p>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-icon">🕒</span>
+                    <div class="detail-content">
+                        <p class="detail-label">Heure</p>
+                        <p class="detail-value">15h30</p>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-icon">📍</span>
+                    <div class="detail-content">
+                        <p class="detail-label">Lieu</p>
+                        <p class="detail-value">
+                            <a href="https://maps.google.com/?q=2600+Rue+Lionel-Audet,+Québec,+QC+G1C+1S0" target="_blank">
+                                2600 Rue Lionel-Audet, étage 2<br>
+                                Québec, QC G1C 1S0
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-icon">👗</span>
+                    <div class="detail-content">
+                        <p class="detail-label">Dress Code</p>
+                        <div class="dresscode">
+                            <span class="color-tag">
+                                <span class="color-dot green"></span>
+                                Vert
+                            </span>
+                            <span class="color-tag">
+                                <span class="color-dot ochre"></span>
+                                Ocre
+                            </span>
+                            <span class="color-tag">
+                                <span class="color-dot gold"></span>
+                                Or
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- After Party Card -->
+            <div class="event-card after-party">
+                <h3>🌙 After Birthday Party</h3>
+                <p style="font-style: italic; color: var(--cream); opacity: 0.8; margin-bottom: 1.5rem;">
+                    Parce que la nuit mérite aussi sa magie...
+                </p>
+                
+                <div class="detail-row">
+                    <span class="detail-icon">🕥</span>
+                    <div class="detail-content">
+                        <p class="detail-label">Heure</p>
+                        <p class="detail-value">22h30</p>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-icon">📍</span>
+                    <div class="detail-content">
+                        <p class="detail-label">Lieu</p>
+                        <p class="detail-value">Au Cognac</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-decoration">💎 🌿 ✨ 🌿 💎</div>
+        <p class="footer-text">Avec amour, Laety</p>
+    </footer>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const eventDate = new Date('February 7, 2026 15:30:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            } else {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Create Sparkles
+        function createSparkles() {
+            const container = document.getElementById('sparkles');
+            const sparkleCount = 25;
+
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 3 + 's';
+                sparkle.style.animationDuration = (2 + Math.random() * 2) + 's';
+                container.appendChild(sparkle);
+            }
+        }
+
+        createSparkles();
+
+        // RSVP confirmation removed (déjà géré)
+
+        // Smooth scroll reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.event-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
